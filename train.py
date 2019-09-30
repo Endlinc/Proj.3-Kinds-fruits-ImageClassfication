@@ -56,11 +56,12 @@ def train_model(model):
     :return:model:   the trained CNN model
     """
     # Add your code here
+    # model.fit_generator()
     return model
 
 
 def save_model(model):
-    """年薪： NZ$35万
+    """
     Save the keras model for later evaluation
     :param model: the trained CNN model
     :return:
