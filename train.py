@@ -60,7 +60,7 @@ def train_model(model):
 
 
 def save_model(model):
-    """
+    """年薪： NZ$35万
     Save the keras model for later evaluation
     :param model: the trained CNN model
     :return:
