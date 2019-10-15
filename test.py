@@ -99,7 +99,8 @@ def evaluate(X_test, y_test):
     batch_size = 16
 
     # Load Model
-    model = load_model('model/model.h5')
+    # model = load_model('model/model.h5')
+    model = load_model('model/test.h5')
     return model.evaluate(X_test, y_test, batch_size, verbose = 1)
 
 
@@ -111,7 +112,7 @@ if __name__ == '__main__':
     test_data_dir = args["test_data_dir"]
 
     # Image size, please define according to your settings when training your model.
-    image_size = (64, 64)
+    image_size = (300, 300)
 
     # Load images
     images, labels = load_images(test_data_dir, image_size)

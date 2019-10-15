@@ -127,4 +127,4 @@ if __name__ == '__main__':
     train_x, train_y = load_data("./data")
     model = construct_model()
     model = train_model(model, train_x, train_y)
-    # save_model(model)
+    save_model(model)
