@@ -61,6 +61,10 @@ def load_images(test_data_dir, image_size = (300, 300)):
         # labels list
         label = imagePath.split(os.path.sep)[-2]
         labels.append(label)
+
+    print(images_data)
+    print('=================')
+    print(labels)
     return images_data, sorted(labels)
 
 
@@ -99,8 +103,8 @@ def evaluate(X_test, y_test):
     batch_size = 16
 
     # Load Model
-    # model = load_model('model/model.h5')
-    model = load_model('model/test.h5')
+    model = load_model('model/model.h5')
+    # model = load_model('model/baseline_model.h5')
     return model.evaluate(X_test, y_test, batch_size, verbose = 1)
 
 
