@@ -45,28 +45,31 @@ def construct_model():
     :return: model: the initial CNN model
     """
     model = Sequential()
-    model.add(Conv2D(32, (3, 3), input_shape=input_shape))
-    model.add(Activation('relu'))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(Conv2D(filters=32, kernel_size=3, activation='relu', padding='same', input_shape=input_shape, data_format='channels_last'))
 
-    model.add(Conv2D(32, (3, 3)))
-    model.add(Activation('relu'))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(Conv2D(filters=32, kernel_size=5, activation='relu', padding='same'))
+    model.add(MaxPooling2D(pool_size=2, strides=2))
 
-    model.add(Conv2D(64, (3, 3)))
-    model.add(Activation('relu'))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
-
-    model.add(Flatten())  # this converts our 3D feature maps to 1D feature vectors
-    model.add(Dense(64))
-    model.add(Activation('relu'))
+    model.add(Conv2D(filters=64, kernel_size=3, activation='relu', padding='same'))
+    model.add(Conv2D(filters=64, kernel_size=3, activation='relu', padding='same', strides=2))
+    model.add(MaxPooling2D(pool_size=2, strides=2))
     model.add(Dropout(0.5))
-    model.add(Dense(1))
-    model.add(Activation('sigmoid'))
+
+    model.add(Conv2D(filters=128, kernel_size=3, activation='relu', padding='same'))
+    model.add(Conv2D(filters=128, kernel_size=3, activation='relu', padding='same'))
+    model.add(Conv2D(filters=128, kernel_size=3, activation='relu', padding='same', strides=2))
+    model.add(MaxPooling2D(pool_size=2, strides=2))
+    model.add(Dropout(0.5))
+
+    model.add(Flatten())
+    model.add(Dense(512, activation='relu'))
+    model.add(Dropout(0.5))
+    model.add(Dense(3, activation='softmax'))
+    # model.summary().FileWriter('logs/', tf.session().graph)
+    # model.summary().FileWriter('logs/', tf.Session().graph)
 
     # model.add(Dense(units=64, activation='relu', input_dim=100))
     # model.add(Dense(units=10, activation='softmax'))
-    model.add(Dense(3, activation='softmax'))
     model.compile(loss='categorical_crossentropy',
               optimizer='sgd',
               metrics=['accuracy'])
